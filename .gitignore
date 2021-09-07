@@ -1,0 +1,4 @@
+dist
+node_modules
+src/ingestors/polkadot/interfaces/*
+!src/ingestors/polkadot/interfaces/definitions.ts
