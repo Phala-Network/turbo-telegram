@@ -1,8 +1,12 @@
-import { Injectable, Module, OnApplicationBootstrap } from '@nestjs/common'
+import { Module, OnApplicationBootstrap, OnApplicationShutdown } from '@nestjs/common'
 import { ModuleRef } from '@nestjs/core'
+import { TypeOrmModule } from '@nestjs/typeorm'
 import { AppConfigModule, AppConfigService } from '../../config'
-import { StorageModule } from '../../storage'
-import { PolkadotIngestor } from './ingestor'
+import { PolkadotBlockIngestor, PolkadotBlockIngestorRoot } from './blockHandlers'
+import { WorkerStat } from './topics/workerStats/entities'
+import { BlockWorkerStatHandler } from './topics/workerStats/handler'
+import { BlockWorkerStatResolver } from './topics/workerStats/resolver'
+import { BlockWorkerStatStorage } from './topics/workerStats/storage'
 
 export interface IPolkadotIngestorDataSource {
     endpoint: string
@@ -13,49 +17,27 @@ export interface IPolkadotIngestorConfiguration {
     dataSources: IPolkadotIngestorDataSource[]
 }
 
-@Injectable()
-export class PolkadotIngestorRoot {
-    private readonly ingestors: PolkadotIngestor[] = []
+@Module({
+    imports: [AppConfigModule, TypeOrmModule.forFeature([WorkerStat])],
+    providers: [
+        BlockWorkerStatHandler,
+        BlockWorkerStatResolver,
+        BlockWorkerStatStorage,
+        PolkadotBlockIngestor,
+        PolkadotBlockIngestorRoot,
+    ],
+})
+export class PolkadotIngestorModule implements OnApplicationBootstrap, OnApplicationShutdown {
+    private blockIngestorRoot?: PolkadotBlockIngestorRoot
 
     constructor(private readonly config: AppConfigService, private readonly moduleRef: ModuleRef) {}
 
-    public async start() {
-        this.ingestors.push(
-            ...(await Promise.all(
-                this.config.ingestors.polkadot.dataSources.map(
-                    (config) =>
-                        new Promise<PolkadotIngestor>(async () => {
-                            const ingestor = await this.moduleRef.resolve(PolkadotIngestor)
-                            await ingestor.start(config)
-
-                            return ingestor
-                        })
-                )
-            ))
-        )
+    async onApplicationBootstrap(): Promise<void> {
+        this.blockIngestorRoot = this.moduleRef.get(PolkadotBlockIngestorRoot)
+        await this.blockIngestorRoot.start(this.config.ingestors.polkadot.dataSources)
     }
 
-    public async stop() {
-        while (true) {
-            const ingestor = this.ingestors.pop()
-            ingestor?.stop()
-
-            if (ingestor === undefined) {
-                break
-            }
-        }
-    }
-}
-
-@Module({
-    imports: [AppConfigModule, StorageModule],
-    providers: [PolkadotIngestor, PolkadotIngestorRoot],
-})
-export class PolkadotIngestorModule implements OnApplicationBootstrap {
-    constructor(private readonly moduleRef: ModuleRef) {}
-
-    async onApplicationBootstrap() {
-        const root = this.moduleRef.get(PolkadotIngestorRoot)
-        await root.start()
+    async onApplicationShutdown(): Promise<void> {
+        await this.blockIngestorRoot?.stop()
     }
 }
