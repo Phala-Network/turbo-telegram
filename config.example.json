@@ -1,0 +1,12 @@
+{
+    "ingestors": {
+        "polkadot": {
+            "dataSources": [
+                {
+                    "endpoint": "wss://pc-test.phala.network/khala/ws",
+                    "name": "para-1"
+                }
+            ]
+        }
+    }
+}

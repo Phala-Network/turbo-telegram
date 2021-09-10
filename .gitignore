@@ -1,4 +1,7 @@
+config.json
 dist
+docker/docker-compose.yml
 node_modules
+ormconfig.json
 src/ingestors/polkadot/interfaces/*
 !src/ingestors/polkadot/interfaces/definitions.ts
