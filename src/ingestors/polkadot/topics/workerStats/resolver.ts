@@ -2,7 +2,7 @@ import { Args, Field, ObjectType, Query, Resolver } from '@nestjs/graphql'
 import { WorkerStat } from './entities'
 import { BlockWorkerStatStorage, IOverallStat } from './storage'
 
-const defaultHourLimit = 7 * 24
+const defaultHourLimit = 24
 const maxHourLimit = 7 * 24
 
 @ObjectType()
@@ -22,15 +22,35 @@ export class BlockWorkerStatResolver {
 
     @Query(() => [WorkerStat])
     async workerStatsPerHour(
-        @Args({ description: 'Public key of worker to be queried', name: 'publicKey' }) publicKey: string,
-        @Args({ description: 'Chain name to be queried', name: 'chainName' }) chainName: string,
-        @Args({ defaultValue: defaultHourLimit, description: 'Hours of history to be queried', name: 'limit' })
-        limit: number
+        @Args({
+            description: 'Chain name to be queried',
+            name: 'chainName',
+        })
+        chainName: string,
+        @Args({
+            description: 'Public key of worker to be queried',
+            name: 'publicKey',
+        })
+        publicKey: string,
+        @Args({
+            defaultValue: defaultHourLimit,
+            description: 'Hours of history to be queried',
+            name: 'limit',
+        })
+        limit: number,
+        @Args({
+            description: 'End date of the range of block timestamp',
+            name: 'endDate',
+            nullable: true,
+        })
+        endDate?: string
     ): Promise<WorkerStat[]> {
-        if (limit < 0 || limit > maxHourLimit) {
-            throw new Error('Limit is out of range')
-        }
-        return await this.storage.findByPublicKeyPerHour(publicKey, chainName, limit)
+        return await this.storage.findByPublicKeyPerHour(
+            publicKey,
+            chainName,
+            limit > 0 && limit < maxHourLimit ? limit : defaultHourLimit,
+            endDate !== undefined ? new Date(endDate) : undefined
+        )
     }
 
     @Query(() => [OverallStat])

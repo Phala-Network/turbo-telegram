@@ -18,14 +18,24 @@ export interface IOverallStat {
 export class BlockWorkerStatStorage {
     constructor(@InjectRepository(WorkerStat) private readonly repository: Repository<WorkerStat>) {}
 
-    public async findByPublicKeyPerHour(publicKey: string, name: string, limit?: number): Promise<WorkerStat[]> {
-        const query = this.repository
+    public async findByPublicKeyPerHour(
+        publicKey: string,
+        name: string,
+        limit: number,
+        last?: Date
+    ): Promise<WorkerStat[]> {
+        let query = this.repository
             .createQueryBuilder('record')
             .distinctOn([`date_trunc('hour', "blockTimestamp")`])
             .orderBy(`date_trunc('hour', "blockTimestamp")`, 'DESC')
             .limit(limit)
             .where('record.chainName = :chainName', { chainName: name })
             .where('record.publicKey = :publicKey', { publicKey })
+
+        if (last !== undefined) {
+            query = query.andWhere('record.blockTimestamp < :last', { last: last.toISOString() })
+        }
+
         return await query.getMany()
     }
 
