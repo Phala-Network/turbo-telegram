@@ -66,7 +66,7 @@ export class WorkerStat implements IWorkerStat {
     public state!: string
 
     @Column({ nullable: false, type: 'bigint' })
-    @Field(() => Int)
+    @Field()
     public totalReward!: string
 
     @Column({ nullable: false, type: 'double precision' })
