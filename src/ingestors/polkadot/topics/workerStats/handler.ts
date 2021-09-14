@@ -4,8 +4,11 @@ import { encodeAddress } from '@polkadot/keyring'
 import { Option, u64 } from '@polkadot/types'
 import { AccountId, BalanceOf, BlockNumber } from '@polkadot/types/interfaces'
 import { u8aToHex } from '@polkadot/util'
+import { Decimal } from 'decimal.js'
 import { WorkerStat } from './entities'
 import { BlockWorkerStatStorage } from './storage'
+
+const TwoSixtyFour = new Decimal(2).pow(64)
 
 @Injectable()
 export class BlockWorkerStatHandler {
@@ -43,8 +46,7 @@ export class BlockWorkerStatHandler {
             entity.stake = (stakes[idx] as Option<BalanceOf>).unwrapOrDefault().toBigInt()
             entity.state = state.toString()
             entity.totalReward = 0
-            entity.v = v.toString()
-            // entity.v = 0
+            entity.v = new Decimal(v.toString()).div(TwoSixtyFour).toString()
             return entity
         })
         await this.storage.write(entities)

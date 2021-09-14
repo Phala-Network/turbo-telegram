@@ -1,8 +1,6 @@
 import { Field, Int, ObjectType } from '@nestjs/graphql'
 import { Column, Entity, Index, PrimaryGeneratedColumn } from 'typeorm'
 
-export enum WorkerState {}
-
 export interface IWorkerStat {
     publicKey: string
 
@@ -71,7 +69,7 @@ export class WorkerStat implements IWorkerStat {
     @Field(() => Int)
     public totalReward!: number | bigint
 
-    @Column({ nullable: false, type: 'varchar' })
+    @Column({ nullable: false, type: 'double precision' })
     @Field()
     public v!: string
 }
