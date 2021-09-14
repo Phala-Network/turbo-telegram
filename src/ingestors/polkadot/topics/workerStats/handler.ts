@@ -23,9 +23,11 @@ export class BlockWorkerStatHandler {
         const workers = await api.query.phalaMining.miners.entriesAt(hash)
         const publicKeys = [...workers.map(([publicKey]) => publicKey)]
 
-        const miners = await api.query.phalaMining.workerBindings.multi(publicKeys)
-        const pids = await api.query.phalaStakePool.workerAssignments.multi(publicKeys)
-        const stakes = await api.query.phalaMining.stakes.multi(publicKeys)
+        const [miners, pids, stakes] = await Promise.all([
+            api.query.phalaMining.workerBindings.multi(publicKeys),
+            api.query.phalaStakePool.workerAssignments.multi(publicKeys),
+            api.query.phalaMining.stakes.multi(publicKeys),
+        ])
 
         const entities = workers.map<WorkerStat>(([publicKey, infoCodec], idx) => {
             const {
