@@ -3,10 +3,12 @@
         "polkadot": {
             "dataSources": [
                 {
-                    "endpoint": "wss://pc-test.phala.network/khala/ws",
-                    "name": "para-1"
+                    "endpoint": "wss://pc-test-3.phala.network/khala/ws",
+                    "name": "para-3",
+                    "startHeight": 20000
                 }
             ]
         }
-    }
+    },
+    "nodename": "summer-hikari"
 }
