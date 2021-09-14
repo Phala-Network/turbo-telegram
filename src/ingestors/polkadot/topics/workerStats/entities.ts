@@ -15,7 +15,7 @@ export interface IWorkerStat {
     pid: bigint | number
     stake: bigint | number
     state: string
-    totalReward: bigint | number
+    totalReward: string
     v: string
 }
 
@@ -67,7 +67,7 @@ export class WorkerStat implements IWorkerStat {
 
     @Column({ nullable: false, type: 'bigint' })
     @Field(() => Int)
-    public totalReward!: number | bigint
+    public totalReward!: string
 
     @Column({ nullable: false, type: 'double precision' })
     @Field()

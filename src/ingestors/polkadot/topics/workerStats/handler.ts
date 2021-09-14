@@ -31,6 +31,7 @@ export class BlockWorkerStatHandler {
             const {
                 benchmark: { pInstant },
                 state,
+                stats: { totalReward },
                 v,
             } = infoCodec.unwrap()
 
@@ -45,7 +46,7 @@ export class BlockWorkerStatHandler {
             entity.publicKey = u8aToHex(publicKey)
             entity.stake = (stakes[idx] as Option<BalanceOf>).unwrapOrDefault().toBigInt()
             entity.state = state.toString()
-            entity.totalReward = 0
+            entity.totalReward = totalReward.toString()
             entity.v = new Decimal(v.toString()).div(TwoSixtyFour).toString()
             return entity
         })
