@@ -4,6 +4,7 @@ import { TypeOrmModule } from '@nestjs/typeorm'
 import { AppConfigModule } from '../config'
 import { IngestorModule } from '../ingestors/config'
 import { PolkadotIngestorModule } from '../ingestors/polkadot'
+import { BlockHeight } from '../ingestors/polkadot/height/entities'
 import { WorkerStat } from '../ingestors/polkadot/topics/workerStats/entities'
 import { StorageModule } from '../storage'
 
@@ -14,7 +15,7 @@ import { StorageModule } from '../storage'
         IngestorModule,
         PolkadotIngestorModule,
         StorageModule,
-        TypeOrmModule.forRoot({ ...require('../../ormconfig.json'), entities: [WorkerStat] }),
+        TypeOrmModule.forRoot({ ...require('../../ormconfig.json'), entities: [BlockHeight, WorkerStat] }),
     ],
 })
 export class AppModule {}
