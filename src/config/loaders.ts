@@ -1,21 +1,16 @@
 import { readFileSync } from 'fs'
 import { merge } from 'lodash'
+import { v4 as uuidv4 } from 'uuid'
 import { IAppConfig } from '.'
 
 export function load(): IAppConfig {
     const defaultConfig: IAppConfig = {
-        influxdb: {
-            bucket: 'data-server',
-            nodename: 'unnamed',
-            org: 'data-server',
-            token: 'let-me-in',
-            url: 'http://localhost:8086',
-        },
         ingestors: {
             polkadot: {
                 dataSources: [],
             },
         },
+        nodename: uuidv4(),
     }
 
     try {
