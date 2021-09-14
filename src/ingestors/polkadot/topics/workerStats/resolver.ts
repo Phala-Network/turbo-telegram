@@ -1,7 +1,6 @@
 import { Args, Field, ObjectType, Query, Resolver } from '@nestjs/graphql'
 import { WorkerStat } from './entities'
-import { BlockWorkerStatStorage } from './storage'
-import { IOverallStat } from './storage'
+import { BlockWorkerStatStorage, IOverallStat } from './storage'
 
 const defaultHourLimit = 7 * 24
 const maxHourLimit = 7 * 24
