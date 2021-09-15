@@ -1,14 +1,25 @@
 version: '3'
 
 services:
+    app:
+        build:
+            args:
+                NETWORK_ENDPOINT: 'wss://pc-test-3.phala.network/khala/ws'
+            context: ..
+            dockerfile: docker/Dockerfile
+        depends_on:
+            - postgres
+        environment:
+            NETWORK_ENDPOINT: 'wss://pc-test-3.phala.network/khala/ws'
+        volumes:
+            - ../config.json:/app/config.json:ro
+            - ../ormconfig.json:/app/ormconfig.json:ro
     postgres:
         image: postgres:13-alpine
         environment:
             POSTGRES_DB: data-server
             POSTGRES_PASSWORD: data-server
             POSTGRES_USER: data-server
-        ports:
-            - '5432:5432'
         volumes:
             - postgres:/var/lib/postgresql/data
 

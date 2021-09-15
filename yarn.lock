@@ -1282,6 +1282,11 @@
   resolved "https://registry.nlark.com/@types/estree/download/@types/estree-0.0.50.tgz?cache=0&sync_timestamp=1629707695723&other_urls=https%3A%2F%2Fregistry.nlark.com%2F%40types%2Festree%2Fdownload%2F%40types%2Festree-0.0.50.tgz#1e0caa9364d3fccd2931c3ed96fdbeaa5d4cca83"
   integrity sha1-Hgyqk2TT/M0pMcPtlv2+ql1MyoM=
 
+"@types/expect@^1.20.4":
+  version "1.20.4"
+  resolved "https://registry.npm.taobao.org/@types/expect/download/@types/expect-1.20.4.tgz#8288e51737bf7e3ab5d7c77bfa695883745264e5"
+  integrity sha1-gojlFze/fjq118d7+mlYg3RSZOU=
+
 "@types/express-serve-static-core@^4.17.18":
   version "4.17.24"
   resolved "https://registry.nlark.com/@types/express-serve-static-core/download/@types/express-serve-static-core-4.17.24.tgz?cache=0&sync_timestamp=1629707952039&other_urls=https%3A%2F%2Fregistry.nlark.com%2F%40types%2Fexpress-serve-static-core%2Fdownload%2F%40types%2Fexpress-serve-static-core-4.17.24.tgz#ea41f93bf7e0d59cd5a76665068ed6aab6815c07"
@@ -1301,12 +1306,37 @@
     "@types/qs" "*"
     "@types/serve-static" "*"
 
+"@types/glob-stream@*":
+  version "6.1.1"
+  resolved "https://registry.nlark.com/@types/glob-stream/download/@types/glob-stream-6.1.1.tgz#c792d8d1514278ff03cad5689aba4c4ab4fbc805"
+  integrity sha1-x5LY0VFCeP8DytVomrpMSrT7yAU=
+  dependencies:
+    "@types/glob" "*"
+    "@types/node" "*"
+
+"@types/glob@*":
+  version "7.1.4"
+  resolved "https://registry.nlark.com/@types/glob/download/@types/glob-7.1.4.tgz?cache=0&sync_timestamp=1629707996938&other_urls=https%3A%2F%2Fregistry.nlark.com%2F%40types%2Fglob%2Fdownload%2F%40types%2Fglob-7.1.4.tgz#ea59e21d2ee5c517914cb4bc8e4153b99e566672"
+  integrity sha1-6lniHS7lxReRTLS8jkFTuZ5WZnI=
+  dependencies:
+    "@types/minimatch" "*"
+    "@types/node" "*"
+
 "@types/graceful-fs@^4.1.2":
   version "4.1.5"
   resolved "https://registry.nlark.com/@types/graceful-fs/download/@types/graceful-fs-4.1.5.tgz#21ffba0d98da4350db64891f92a9e5db3cdb4e15"
   integrity sha1-If+6DZjaQ1DbZIkfkqnl2zzbThU=
   dependencies:
     "@types/node" "*"
+
+"@types/gulp@^4.0.9":
+  version "4.0.9"
+  resolved "https://registry.nlark.com/@types/gulp/download/@types/gulp-4.0.9.tgz#a2f9667bcc26bc72b4899dd16216d6584a12346c"
+  integrity sha1-ovlme8wmvHK0iZ3RYhbWWEoSNGw=
+  dependencies:
+    "@types/undertaker" "*"
+    "@types/vinyl-fs" "*"
+    chokidar "^3.3.1"
 
 "@types/istanbul-lib-coverage@*", "@types/istanbul-lib-coverage@^2.0.0", "@types/istanbul-lib-coverage@^2.0.1":
   version "2.0.3"
@@ -1359,6 +1389,11 @@
   version "1.3.2"
   resolved "https://registry.nlark.com/@types/mime/download/@types/mime-1.3.2.tgz#93e25bf9ee75fe0fd80b594bc4feb0e862111b5a"
   integrity sha1-k+Jb+e51/g/YC1lLxP6w6GIRG1o=
+
+"@types/minimatch@*":
+  version "3.0.5"
+  resolved "https://registry.nlark.com/@types/minimatch/download/@types/minimatch-3.0.5.tgz?cache=0&sync_timestamp=1629708301760&other_urls=https%3A%2F%2Fregistry.nlark.com%2F%40types%2Fminimatch%2Fdownload%2F%40types%2Fminimatch-3.0.5.tgz#1001cc5e6a3704b83c236027e77f2f58ea010f40"
+  integrity sha1-EAHMXmo3BLg8I2An538vWOoBD0A=
 
 "@types/node-fetch@^2.5.12":
   version "2.5.12"
@@ -1426,10 +1461,41 @@
   dependencies:
     "@types/superagent" "*"
 
+"@types/undertaker-registry@*":
+  version "1.0.1"
+  resolved "https://registry.nlark.com/@types/undertaker-registry/download/@types/undertaker-registry-1.0.1.tgz#4306d4a03d7acedb974b66530832b90729e1d1da"
+  integrity sha1-QwbUoD16ztuXS2ZTCDK5Bynh0do=
+
+"@types/undertaker@*":
+  version "1.2.7"
+  resolved "https://registry.nlark.com/@types/undertaker/download/@types/undertaker-1.2.7.tgz#89c37fd3be556141a4092b38f8bc503076803d21"
+  integrity sha1-icN/075VYUGkCSs4+LxQMHaAPSE=
+  dependencies:
+    "@types/node" "*"
+    "@types/undertaker-registry" "*"
+    async-done "~1.3.2"
+
 "@types/uuid@^8.3.1":
   version "8.3.1"
   resolved "https://registry.nlark.com/@types/uuid/download/@types/uuid-8.3.1.tgz?cache=0&sync_timestamp=1629710909887&other_urls=https%3A%2F%2Fregistry.nlark.com%2F%40types%2Fuuid%2Fdownload%2F%40types%2Fuuid-8.3.1.tgz#1a32969cf8f0364b3d8c8af9cc3555b7805df14f"
   integrity sha1-GjKWnPjwNks9jIr5zDVVt4Bd8U8=
+
+"@types/vinyl-fs@*":
+  version "2.4.12"
+  resolved "https://registry.nlark.com/@types/vinyl-fs/download/@types/vinyl-fs-2.4.12.tgz#7b4673d9b4d5a874c8652d10f0f0265479014c8e"
+  integrity sha1-e0Zz2bTVqHTIZS0Q8PAmVHkBTI4=
+  dependencies:
+    "@types/glob-stream" "*"
+    "@types/node" "*"
+    "@types/vinyl" "*"
+
+"@types/vinyl@*":
+  version "2.0.6"
+  resolved "https://registry.nlark.com/@types/vinyl/download/@types/vinyl-2.0.6.tgz#b2d134603557a7c3d2b5d3dc23863ea2b5eb29b0"
+  integrity sha1-stE0YDVXp8PStdPcI4Y+orXrKbA=
+  dependencies:
+    "@types/expect" "^1.20.4"
+    "@types/node" "*"
 
 "@types/websocket@^1.0.4":
   version "1.0.4"
@@ -2097,7 +2163,7 @@ astral-regex@^2.0.0:
   resolved "https://registry.npm.taobao.org/astral-regex/download/astral-regex-2.0.0.tgz#483143c567aeed4785759c0865786dc77d7d2e31"
   integrity sha1-SDFDxWeu7UeFdZwIZXhtx319LjE=
 
-async-done@^1.2.0, async-done@^1.2.2:
+async-done@^1.2.0, async-done@^1.2.2, async-done@~1.3.2:
   version "1.3.2"
   resolved "https://registry.npm.taobao.org/async-done/download/async-done-1.3.2.tgz#5e15aa729962a4b07414f528a88cdf18e0b290a2"
   integrity sha1-XhWqcplipLB0FPUoqIzfGOCykKI=
@@ -2516,7 +2582,7 @@ chardet@^0.7.0:
   resolved "https://registry.npm.taobao.org/chardet/download/chardet-0.7.0.tgz?cache=0&sync_timestamp=1601034855780&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fchardet%2Fdownload%2Fchardet-0.7.0.tgz#90094849f0937f2eedc2425d0d28a9e5f0cbad9e"
   integrity sha1-kAlISfCTfy7twkJdDSip5fDLrZ4=
 
-chokidar@3.5.2, chokidar@^3.4.2:
+chokidar@3.5.2, chokidar@^3.3.1, chokidar@^3.4.2:
   version "3.5.2"
   resolved "https://registry.nlark.com/chokidar/download/chokidar-3.5.2.tgz#dba3976fcadb016f66fd365021d91600d01c1e75"
   integrity sha1-26OXb8rbAW9m/TZQIdkWANAcHnU=
