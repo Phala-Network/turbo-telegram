@@ -5,6 +5,7 @@ import { WorkerStat } from './entities'
 
 export interface IOverallStat {
     block: number
+    blockTimestamp: Date
     count: number
     state: string
 

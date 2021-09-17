@@ -8,6 +8,7 @@ const maxHourLimit = 7 * 24
 @ObjectType()
 export class OverallStat implements IOverallStat {
     @Field() public block!: number
+    @Field() public blockTimestamp!: Date
     @Field() public count!: number
     @Field() public pSum!: string
     @Field() public stakeSum!: string
