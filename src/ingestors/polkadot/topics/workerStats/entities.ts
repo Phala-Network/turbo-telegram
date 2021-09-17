@@ -31,14 +31,17 @@ export class WorkerStat implements IWorkerStat {
 
     @Column({ nullable: false, type: 'varchar' })
     @Field()
+    @Index()
     public chain!: string
 
     @Column({ nullable: false, type: 'varchar' })
     @Field()
+    @Index()
     public chainName!: string
 
     @Column({ nullable: false, type: 'bigint' })
     @Field(() => Int)
+    @Index()
     public block!: bigint | number
 
     @Column({ nullable: false, type: 'timestamp' })
